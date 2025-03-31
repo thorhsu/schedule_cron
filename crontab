@@ -1,0 +1,7 @@
+15 20 * * * python3 /app/tasks.py migrate >> /app/share/log/cron.log 2>&1
+15 0 * * * python3 /app/tasks.py get_files_from_middleware_server >> /app/share/log/cron.log 2>&1
+50 * * * * python3 /app/tasks.py csv_data_import >> /app/share/log/cron.log 2>&1
+5 10 * * * python3 /app/tasks.py receive_mail >> /app/share/log/cron.log 2>&1
+15 10 * * * python3 /app/tasks.py excel_data_import >> /app/share/log/cron.log 2>&1
+15 11 * * * python3 /app/tasks.py daily_report >> /app/share/log/cron.log 2>&1
+15 12 * * * python3 /app/tasks.py daily_excel_report >> /app/share/log/cron.log 2>&1

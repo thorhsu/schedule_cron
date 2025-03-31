@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:latest # Replace percona with mariadb
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: caterlordpos
+      MYSQL_USER: lfpos
+      MYSQL_PASSWORD: lfpos
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql # Persistent storage
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Run SQL on first start
+
+  app:
+    build: .
+    container_name: app
+    restart: always
+    volumes:
+      - "/app/share:/home/thorhsu/schedule_cron_share"
+    environment:
+      DB_HOST: mariadb # Use the service name as the host
+      DB_PORT: 3306
+      DB_NAME: caterlordpos
+      DB_USER: lfpos
+      DB_PASSWORD: lfpos
+    depends_on:
+      - mariadb
+
+volumes:
+  mariadb_data:

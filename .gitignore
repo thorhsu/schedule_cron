@@ -1,0 +1,8 @@
+*.pyc
+*.DS_Store
+*.idea
+*.pytest_cache
+*__pycache
+settings/env_dev.json
+settings/env_prod.json
+
