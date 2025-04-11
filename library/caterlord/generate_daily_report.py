@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 from sqlalchemy import create_engine, text
 from datetime import datetime, timedelta
@@ -5,6 +7,7 @@ import settings.settings as settings
 from library.utils.excelUtils import ExcelUtils
 
 UG_template_file = settings.UG_TEMPLATE
+FILES4PARSE = settings.FILES4PARSE
 excel_output = settings.EXCEL_OUTPUT
 mysql_engine = create_engine(f"mysql+pymysql://{settings.DATABASES['sharetea_mysql']['USER']}:{settings.DATABASES['sharetea_mysql']['PASSWORD']}@{settings.DATABASES['sharetea_mysql']['HOST']}:{settings.DATABASES['sharetea_mysql']['PORT']}/{settings.DATABASES['sharetea_mysql']['DBNAME']}")
 weekday_map = {
@@ -28,6 +31,7 @@ shop_map = {
     '6527': '士林-H',
 }
 def generate_daily_report(year: int, month: int, excel_path: str = UG_template_file, output_path: str = excel_output):
+    os.listdir()
     today = datetime.now().strftime("%Y-%m-%d")        
     try:
         rocYear = year - 1911

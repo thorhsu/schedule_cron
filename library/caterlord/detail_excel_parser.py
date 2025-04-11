@@ -11,12 +11,13 @@ mysql_engine = create_engine(f"mysql+pymysql://{settings.DATABASES['sharetea_mys
 # print('mysql', f"mysql+pymysql://{settings.DATABASES['sharetea_mysql']['USER']}:{settings.DATABASES['sharetea_mysql']['PASSWORD']}@{settings.DATABASES['sharetea_mysql']['HOST']}:{settings.DATABASES['sharetea_mysql']['PORT']}/{settings.DATABASES['sharetea_mysql']['DBNAME']}")
 FILES4PARSE = settings.FILES4PARSE
 a = []
-df_cust = pd.read_sql(
-    text("select ps3 shopId, substring(nam_custs, 4) shopName from cust where nam_custs like '%UG%'"),
-    con=mysql_engine)
-shop_dict = df_cust.set_index('shopName').to_dict()['shopId']
 
 def get_shop_id(shop_name: str) -> str:
+    df_cust = pd.read_sql(
+        text("select ps3 shopId, substring(nam_custs, 4) shopName from cust where nam_custs like '%UG%'"),
+        con=mysql_engine)
+    shop_dict = df_cust.set_index('shopName').to_dict()['shopId']
+
     if shop_dict.get(str(shop_name)):
         return str(shop_dict[str(shop_name)])
     for key, value in shop_dict.items():

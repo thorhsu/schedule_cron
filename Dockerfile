@@ -1,7 +1,7 @@
 FROM python:latest
 
 LABEL authors="thorhsu"
-
+USER root
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
@@ -55,6 +55,6 @@ RUN mkdir -p /app/share
 RUN mkdir -p /app/share/log/
 RUN mkdir -p /app/share/files4parse/
 RUN touch /app/share/log/cron.log
-RUN crontab /etc/cron.d/crontab
+#RUN crontab /etc/cron.d/crontab
 # Start cron when the container starts
 CMD cron && tail -f /app/share/log/cron.log

@@ -1,0 +1,8 @@
+*/10 * * * * docker exec app /bin/bash /app/scripts/test.sh >> /home/thorhsu/schedule_cron_share/log/test.log\r
+41 20 * * *  docker exec app /bin/bash /app/scripts/migrate.sh >> /home/thorhsu/schedule_cron_share/log/migrate.log\r
+47 1 * * * docker exec  app /bin/bash /app/scripts/get_files_from_middleware_server.sh >> /home/thorhsu/schedule_cron_share/log/getRemoteFiles.log\r
+50 * * * * docker exec  app /bin/bash /app/scripts/csv_data_import.sh >> /home/thorhsu/schedule_cron_share/log/csvData.log\r
+5 9 * * * docker exec  app /bin/bash /app/scripts/receive_mail.sh >> /home/thorhsu/schedule_cron_share/log/receiveMail.log\r
+15 10 * * * docker exec  app /bin/bash /app/scripts/excel_data_import.sh >> /home/thorhsu/schedule_cron_share/log/excelData.log\r
+15 11 * * * docker exec  app /bin/bash /app/scripts/daily_report.sh >> /home/thorhsu/schedule_cron_share/log/dailyReport.log\r
+15 12 * * * docker exec  app /bin/bash /app/scripts/daily_excel_report.sh >> /home/thorhsu/schedule_cron_share/log/dailyExcel.log\r

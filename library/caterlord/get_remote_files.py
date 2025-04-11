@@ -24,11 +24,11 @@ def get_remote_files():
     file_names.extend(df_h['filename'].to_list())
 
     # SMB server details
-    server_name = "192.168.32.170"  # Replace with your SMB server IP/hostname
+    server_name = settings.SMB_SERVER_NAME  # Replace with your SMB server IP/hostname
     server_port = 445
-    username = r"L120200134\Administrator"
-    password = "!StUg26548585"
-    share_name = "Middleware/12319"
+    username = settings.SMB_USERNAME
+    password = settings.SMB_PASSWORD
+    share_name = settings.SMB_SHARE_NAME
     # file_path = "example.txt"  # File to read from the shared folder
 
     # Establish connection

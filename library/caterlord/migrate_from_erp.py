@@ -32,7 +32,13 @@ shop_data = {
                    "6524",
                    "6525",
                    "6526",
-                   "6527"
+                   "6527",
+                    "6747",
+                    "6748",
+                    "6749",
+                    "6750",
+                    "6760",
+                    "6761",
                 ],
                 "ShopName":
                 ["忠孝敦化店",
@@ -42,7 +48,13 @@ shop_data = {
                    "羅東民權店",
                    "林口長庚店",
                    "台北大巨蛋店",
-                   "士林捷運店"
+                   "士林捷運店",
+                    "新店民權店",
+                    "台中逢甲店",
+                    "嘉義文化店",
+                    "高雄巨蛋店",
+                    "台中勤美店",
+                    "台南民生店",
         ]}
 shop_df = pd.DataFrame(data=shop_data)
 
@@ -94,7 +106,7 @@ def migrate_from_erp():
                 nam_custs = row_dict["ShopName"]
                 # update cust and set shopId
 
-                sql = text(f"UPDATE cust SET ps3 = :ShopId WHERE nam_custs = 'UG-{nam_custs}'")
+                sql = text(f"UPDATE cust SET ps3 = :ShopId WHERE nam_custs like '%{nam_custs}%' and cod_cust like 'UGTW%'")
                 conn.execute(sql, row_dict)
             except Exception as e:
                 print(f"error: {repr(e)}")

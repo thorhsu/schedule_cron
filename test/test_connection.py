@@ -16,5 +16,4 @@ password = "YhBrY23dhMP2"
 
 # 建立連線
 dsn = f"{host}:{port}/{service_name}"  # 格式為 主機:連接埠/服務名稱
-def test_conection():
-    migrate_from_erp()
+migrate_from_erp()

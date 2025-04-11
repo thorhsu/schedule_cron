@@ -48,11 +48,37 @@ def excel_data_import(folder_path=None):
 
 # 產生日報表（在db中）
 def daily_report(arg1=None):
-    daily_db()
+    today = datetime.today().strftime("%Y%m%d")
+    files = os.listdir(settings.FILES4PARSE)
+    files1 = [file for file in filter(lambda x: x.endswith(".txt")
+                                               and x.startswith("tlps")
+                                               and x[-13:-5] < today, files)]
+    today = datetime.today().strftime("%Y-%m-%d")
+    files2 = [file for file in filter(lambda x: x.endswith(".xlsx")
+                                               and x.startswith("SalesDetailReport")
+                                               and x[-15:-5] <= today, files)]
+    if files1 == [] and files2 == []:
+        print("Starting daily DB report...")
+        daily_db()
+    else:
+        print("Daily report stop because files are still in processing...")
 
 # 產生excel日報表
 def daily_excel_report():
-    generate_daily_report()
+    today = datetime.today().strftime("%Y%m%d")
+    files = os.listdir(settings.FILES4PARSE)
+    files1 = [file for file in filter(lambda x: x.endswith(".txt")
+                                                and x.startswith("tlps")
+                                                  and x[-13:-5] < today, files)]
+    today = datetime.today().strftime("%Y-%m-%d")
+    files2 = [file for file in filter(lambda x: x.endswith(".xlsx")
+                                                and x.startswith("SalesDetailReport")
+                                                and x[-15:-5] <= today, files)]
+    if files1 == [] and files2 == []:
+        print("Starting daily excel report...")
+        generate_daily_report()
+    else:
+        print("Files are still in processing. ")
 
 # def copy_file(file_path):
 
